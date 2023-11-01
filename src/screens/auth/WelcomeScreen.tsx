@@ -14,6 +14,7 @@ import {onBoardingBgImage, powerdopLogo} from '../../utils/images';
 import {WINDOW_HEIGHT, WINDOW_WIDTH} from '../../utils';
 import TextInputComponent from '../../component/TextInputComponent';
 import LinearGradient from 'react-native-linear-gradient';
+import {Poppins_Regular} from '../../utils/fonts';
 
 const WelcomeScreen = ({navigation}) => {
   const [isLoginSelected, setIsLoginSelected] = useState(true);
@@ -156,6 +157,7 @@ const styles = StyleSheet.create({
     color: WHITE_COLOR,
     fontWeight: '600',
     fontSize: 15,
+    fontFamily: Poppins_Regular,
   },
   imageLinerGradient: {
     ...StyleSheet.absoluteFill,
