@@ -15,11 +15,11 @@ function AppContainer() {
         component={SplashScreen}
         options={{headerShown: false}}
       />
-        <Stack.Screen
-          name="AuthStackContainer"
-          component={AuthStackContainer}
-          options={{headerShown: false}}
-        />
+      <Stack.Screen
+        name="AuthStackContainer"
+        component={AuthStackContainer}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="TabContainer"
         component={TabContainer}
