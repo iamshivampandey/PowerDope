@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Text, TextInput} from 'react-native';
 import {DARK_GRAY_COLOR, WHITE_COLOR} from '../utils/colors';
+import {verticalScale} from 'react-native-size-matters';
 
 const TextInputComponent = ({fieldNameText, onTextInput}) => {
   return (
@@ -12,6 +13,7 @@ const TextInputComponent = ({fieldNameText, onTextInput}) => {
           onChangeText={text => {
             onTextInput(text);
           }}
+          // value={'cxzxczxncbzx'}
         />
       </View>
     </View>
@@ -20,7 +22,7 @@ const TextInputComponent = ({fieldNameText, onTextInput}) => {
 
 const styles = StyleSheet.create({
   container: {
-    gap: 5,
+    gap: verticalScale(2),
   },
   fieldNameText: {
     color: WHITE_COLOR,
@@ -29,11 +31,11 @@ const styles = StyleSheet.create({
   },
   inputBoxView: {
     width: '95%',
-    height: 30,
+    height: verticalScale(22),
     borderBottomWidth: 1,
     borderColor: '#00CC6680',
     justifyContent: 'flex-end',
-    paddingHorizontal:3
+    paddingHorizontal: 3,
   },
   inputBox: {
     color: DARK_GRAY_COLOR,

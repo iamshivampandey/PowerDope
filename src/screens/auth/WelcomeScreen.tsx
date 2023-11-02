@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {
-  Image,
   ImageBackground,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -10,10 +8,18 @@ import {
 } from 'react-native';
 import {BALCK_COLOR, PD_THEME_COLOR, WHITE_COLOR} from '../../utils/colors';
 import FastImage from 'react-native-fast-image';
-import {onBoardingBgImage, powerdopLogo} from '../../utils/images';
+import {
+  adminid_image,
+  google_image,
+  numberpad_image,
+  onBoardingBgImage,
+  outlook_image,
+  powerdopLogo,
+} from '../../utils/images';
 import {WINDOW_HEIGHT, WINDOW_WIDTH} from '../../utils';
 import TextInputComponent from '../../component/TextInputComponent';
 import LinearGradient from 'react-native-linear-gradient';
+import {scale, moderateVerticalScale} from 'react-native-size-matters';
 
 const WelcomeScreen = ({navigation}) => {
   const [isLoginSelected, setIsLoginSelected] = useState(true);
@@ -28,23 +34,27 @@ const WelcomeScreen = ({navigation}) => {
     setIsLoginSelected(false);
     setRegisterSelected(true);
   };
-
+  const gradientColor = ['#00000000', '#000000'];
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ImageBackground
-        style={{
-          width: '100%',
-          height: '90%',
-          position: 'absolute',
-          bottom: 100,
-          display: isRegisterSelected ? 'none' : 'flex',
-        }}
+        style={[
+          styles.bgImage,
+          {display: isRegisterSelected ? 'none' : 'flex'},
+        ]}
         source={onBoardingBgImage}>
         <LinearGradient
-          colors={['#00000000', '#000000']}
+          colors={gradientColor}
           style={styles.gradient}
           start={{x: 0, y: 1}}
-          end={{x: 0, y: 0}}></LinearGradient>
+          end={{x: 0, y: 0}}
+        />
+        <LinearGradient
+          colors={gradientColor}
+          style={styles.gradient}
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 1.2}}
+        />
       </ImageBackground>
       <View style={styles.logoView}>
         <FastImage source={powerdopLogo} style={styles.pdLogo} />
@@ -92,7 +102,33 @@ const WelcomeScreen = ({navigation}) => {
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+      <View style={styles.socialContainer}>
+        <View style={styles.socialSubContainer}>
+          <TouchableOpacity style={styles.socialButtonView} onPress={() => {}}>
+            <FastImage source={outlook_image} style={styles.outlookIcon} />
+          </TouchableOpacity>
+          <Text style={styles.socialLoginText}>outlook</Text>
+        </View>
+        <View style={styles.googleSubContainer}>
+          <TouchableOpacity style={styles.googleView} onPress={() => []}>
+            <FastImage source={google_image} style={styles.googleIcon} />
+          </TouchableOpacity>
+          <Text style={styles.socialLoginText}>Google</Text>
+        </View>
+        <View style={styles.googleSubContainer}>
+          <TouchableOpacity style={styles.googleView} onPress={() => []}>
+            <FastImage source={numberpad_image} style={styles.googleIcon} />
+          </TouchableOpacity>
+          <Text style={styles.socialLoginText}>Number</Text>
+        </View>
+        <View style={styles.socialSubContainer}>
+          <TouchableOpacity style={styles.socialButtonView} onPress={() => []}>
+            <FastImage source={adminid_image} style={styles.outlookIcon} />
+          </TouchableOpacity>
+          <Text style={styles.socialLoginText}>Admin Id</Text>
+        </View>
+      </View>
+    </View>
   );
 };
 
@@ -100,6 +136,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BALCK_COLOR,
+    paddingTop: moderateVerticalScale(50),
   },
   logoView: {
     alignItems: 'center',
@@ -126,17 +163,14 @@ const styles = StyleSheet.create({
     width: '80%',
     alignSelf: 'center',
     gap: 30,
-    marginTop: WINDOW_HEIGHT * 0.05,
+    marginTop: moderateVerticalScale(35),
     marginBottom: 20,
-    height: WINDOW_HEIGHT * 0.43,
-    // backgroundColor:'red'
+    height: moderateVerticalScale(350),
   },
   toggleContainer: {
     flexDirection: 'row',
     borderRadius: 12,
-    overflow: 'hidden',
     width: '60%',
-    marginTop: 30,
     alignSelf: 'center',
     backgroundColor: 'transparent',
     borderWidth: 1,
@@ -167,6 +201,49 @@ const styles = StyleSheet.create({
     height: WINDOW_HEIGHT * 0.4,
     width: '100%',
   },
+  bgImage: {
+    width: '100%',
+    height: moderateVerticalScale(520),
+    position: 'absolute',
+    top: moderateVerticalScale(100),
+    bottom: 0,
+    margin: 'auto',
+  },
+  socialContainer: {
+    flexDirection: 'row',
+    marginTop: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+  },
+  socialButtonView: {},
+  googleView: {
+    width: 26,
+    height: 26,
+    padding: 10,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 17,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  socialLoginText: {
+    color: WHITE_COLOR,
+    fontWeight: '500',
+    fontSize: 8,
+  },
+  socialSubContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  googleSubContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    height: moderateVerticalScale(48),
+    width: scale(38),
+    gap: 7,
+  },
+  outlookIcon: {width: 38, height: 38},
+  googleIcon: {width: 18, height: 18},
 });
 
 export default WelcomeScreen;
