@@ -35,6 +35,7 @@ function TabContainer() {
 
   return (
     <Tab.Navigator
+      initialRouteName="HomeScreen"
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarIcon: ({focused, color, size}) => {

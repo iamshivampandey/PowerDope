@@ -10,6 +10,9 @@ import {BALCK_COLOR, PD_THEME_COLOR, WHITE_COLOR} from '../../utils/colors';
 import FastImage from 'react-native-fast-image';
 import {
   adminid_image,
+  back_arrow_ic,
+  box_check_ic,
+  box_unchecked_ic,
   google_image,
   numberpad_image,
   onBoardingBgImage,
@@ -20,10 +23,15 @@ import {WINDOW_HEIGHT, WINDOW_WIDTH} from '../../utils';
 import TextInputComponent from '../../component/TextInputComponent';
 import LinearGradient from 'react-native-linear-gradient';
 import {scale, moderateVerticalScale} from 'react-native-size-matters';
+import VectorImage from 'react-native-vector-image';
+import TabContainer from '../../routes/TabContainer';
 
 const WelcomeScreen = ({navigation}) => {
   const [isLoginSelected, setIsLoginSelected] = useState(true);
   const [isRegisterSelected, setRegisterSelected] = useState(false);
+  const [isShowBtoomView, setIsShowBtoomView] = useState(true);
+  const [isShowLoginInputs, setIsShowLoginInputs] = useState(false);
+  const [isRememberMe, setIsRememberMe] = useState(false);
 
   const switchToLogin = () => {
     setIsLoginSelected(true);
@@ -34,100 +42,174 @@ const WelcomeScreen = ({navigation}) => {
     setIsLoginSelected(false);
     setRegisterSelected(true);
   };
+
+  const onInputFocus = () => {
+    setIsShowBtoomView(false);
+  };
   const gradientColor = ['#00000000', '#000000'];
   return (
     <View style={styles.container}>
-      <ImageBackground
-        style={[
-          styles.bgImage,
-          {display: isRegisterSelected ? 'none' : 'flex'},
-        ]}
-        source={onBoardingBgImage}>
-        <LinearGradient
-          colors={gradientColor}
-          style={styles.gradient}
-          start={{x: 0, y: 1}}
-          end={{x: 0, y: 0}}
-        />
-        <LinearGradient
-          colors={gradientColor}
-          style={styles.gradient}
-          start={{x: 0, y: 0}}
-          end={{x: 0, y: 1.2}}
-        />
-      </ImageBackground>
+      {isLoginSelected && (
+        <ImageBackground style={[styles.bgImage]} source={onBoardingBgImage}>
+          <LinearGradient
+            colors={gradientColor}
+            style={styles.gradient}
+            start={{x: 0, y: 1}}
+            end={{x: 0, y: 0}}
+          />
+          <LinearGradient
+            colors={gradientColor}
+            style={styles.gradient}
+            start={{x: 0, y: 0}}
+            end={{x: 0, y: 1.2}}
+          />
+        </ImageBackground>
+      )}
       <View style={styles.logoView}>
         <FastImage source={powerdopLogo} style={styles.pdLogo} />
         <Text style={styles.headerText}>
           Welcome to <Text style={styles.pdText}>PowerDope</Text>
         </Text>
       </View>
-
       <View style={styles.inputsArea}>
         {isRegisterSelected && (
           <>
             <TextInputComponent
               fieldNameText={'Name'}
               onTextInput={text => {}}
+              onInputFocus={onInputFocus}
             />
             <TextInputComponent
               fieldNameText={'NUMBER'}
               onTextInput={text => {}}
+              onInputFocus={onInputFocus}
             />
             <TextInputComponent
               fieldNameText={'PASSWORD'}
               onTextInput={text => {}}
+              onInputFocus={onInputFocus}
             />
             <TextInputComponent
               fieldNameText={'RE-TYPE PASSWORD'}
               onTextInput={text => {}}
+              onInputFocus={onInputFocus}
             />
             <TextInputComponent
               fieldNameText={'AGE'}
               onTextInput={text => {}}
+              onInputFocus={onInputFocus}
             />
+          </>
+        )}
+        {isShowLoginInputs && (
+          <>
+            <TextInputComponent
+              fieldNameText={'Account'}
+              onTextInput={text => {}}
+              onInputFocus={onInputFocus}
+            />
+            <TextInputComponent
+              fieldNameText={'Password'}
+              onTextInput={text => {}}
+              onInputFocus={onInputFocus}
+            />
+            <View style={{flexDirection: 'row', gap: 10}}>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: isRememberMe ? WHITE_COLOR : 'transparent',
+                }}
+                onPress={() => {
+                  setIsRememberMe(prev => !prev);
+                }}>
+                <VectorImage
+                  source={isRememberMe ? box_check_ic : box_unchecked_ic}
+                  tintColor={PD_THEME_COLOR}
+                />
+              </TouchableOpacity>
+              <Text style={styles.rememberMeText}>Remember me</Text>
+            </View>
           </>
         )}
       </View>
 
-      <View style={styles.toggleContainer}>
-        <TouchableOpacity
-          style={[styles.button, isLoginSelected ? styles.selected : {}]}
-          onPress={switchToLogin}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, isRegisterSelected ? styles.selected : {}]}
-          onPress={switchToRegister}>
-          <Text style={styles.buttonText}>Register</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.socialContainer}>
-        <View style={styles.socialSubContainer}>
-          <TouchableOpacity style={styles.socialButtonView} onPress={() => {}}>
-            <FastImage source={outlook_image} style={styles.outlookIcon} />
+      {isShowBtoomView && (
+        <>
+          <View style={styles.toggleContainer}>
+            <TouchableOpacity
+              style={[styles.button, isLoginSelected ? styles.selected : {}]}
+              onPress={switchToLogin}>
+              <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, isRegisterSelected ? styles.selected : {}]}
+              onPress={switchToRegister}>
+              <Text style={styles.buttonText}>Register</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.socialContainer}>
+            <View style={styles.socialSubContainer}>
+              <TouchableOpacity
+                style={styles.socialButtonView}
+                onPress={() => {}}>
+                <FastImage source={outlook_image} style={styles.outlookIcon} />
+              </TouchableOpacity>
+              <Text style={styles.socialLoginText}>outlook</Text>
+            </View>
+            <View style={styles.googleSubContainer}>
+              <TouchableOpacity style={styles.googleView} onPress={() => []}>
+                <FastImage source={google_image} style={styles.googleIcon} />
+              </TouchableOpacity>
+              <Text style={styles.socialLoginText}>Google</Text>
+            </View>
+            <View style={styles.googleSubContainer}>
+              <TouchableOpacity style={styles.googleView} onPress={() => []}>
+                <FastImage source={numberpad_image} style={styles.googleIcon} />
+              </TouchableOpacity>
+              <Text style={styles.socialLoginText}>Number</Text>
+            </View>
+            <View style={styles.socialSubContainer}>
+              <TouchableOpacity
+                style={styles.socialButtonView}
+                onPress={() => {
+                  setIsShowLoginInputs(true);
+                  setIsLoginSelected(false);
+                  setRegisterSelected(false);
+                  setIsShowBtoomView(false);
+                }}>
+                <FastImage source={adminid_image} style={styles.outlookIcon} />
+              </TouchableOpacity>
+              <Text style={styles.socialLoginText}>Admin Id</Text>
+            </View>
+          </View>
+        </>
+      )}
+      {!isShowBtoomView && (
+        <View style={styles.registerBtnView}>
+          <TouchableOpacity
+            style={[styles.backButton]}
+            onPress={() => {
+              setIsLoginSelected(true);
+              setIsShowBtoomView(true);
+              setRegisterSelected(false);
+              setIsShowLoginInputs(false);
+            }}>
+            <VectorImage source={back_arrow_ic} />
           </TouchableOpacity>
-          <Text style={styles.socialLoginText}>outlook</Text>
-        </View>
-        <View style={styles.googleSubContainer}>
-          <TouchableOpacity style={styles.googleView} onPress={() => []}>
-            <FastImage source={google_image} style={styles.googleIcon} />
+          <TouchableOpacity
+            style={[styles.registerButton]}
+            onPress={() => {
+              if (isShowLoginInputs) {
+                navigation.navigate('TabContainer');
+              }
+            }}>
+            {isShowLoginInputs ? (
+              <Text style={styles.buttonText}>Login</Text>
+            ) : (
+              <Text style={styles.buttonText}>Register</Text>
+            )}
           </TouchableOpacity>
-          <Text style={styles.socialLoginText}>Google</Text>
         </View>
-        <View style={styles.googleSubContainer}>
-          <TouchableOpacity style={styles.googleView} onPress={() => []}>
-            <FastImage source={numberpad_image} style={styles.googleIcon} />
-          </TouchableOpacity>
-          <Text style={styles.socialLoginText}>Number</Text>
-        </View>
-        <View style={styles.socialSubContainer}>
-          <TouchableOpacity style={styles.socialButtonView} onPress={() => []}>
-            <FastImage source={adminid_image} style={styles.outlookIcon} />
-          </TouchableOpacity>
-          <Text style={styles.socialLoginText}>Admin Id</Text>
-        </View>
-      </View>
+      )}
     </View>
   );
 };
@@ -166,6 +248,8 @@ const styles = StyleSheet.create({
     marginTop: moderateVerticalScale(35),
     marginBottom: 20,
     height: moderateVerticalScale(350),
+    // alignItems:'center',
+    justifyContent: 'center',
   },
   toggleContainer: {
     flexDirection: 'row',
@@ -244,6 +328,35 @@ const styles = StyleSheet.create({
   },
   outlookIcon: {width: 38, height: 38},
   googleIcon: {width: 18, height: 18},
+  registerButton: {
+    // paddingVertical: 9,
+    height: moderateVerticalScale(35),
+    paddingHorizontal: moderateVerticalScale(35),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 12,
+    backgroundColor: PD_THEME_COLOR,
+  },
+  registerBtnView: {
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 15,
+  },
+  backButton: {
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: PD_THEME_COLOR,
+  },
+  rememberMeText: {
+    color: WHITE_COLOR,
+    fontSize: 15,
+    fontWeight: '500',
+  },
 });
 
 export default WelcomeScreen;

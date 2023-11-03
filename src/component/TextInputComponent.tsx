@@ -3,7 +3,7 @@ import {View, StyleSheet, Text, TextInput} from 'react-native';
 import {DARK_GRAY_COLOR, WHITE_COLOR} from '../utils/colors';
 import {verticalScale} from 'react-native-size-matters';
 
-const TextInputComponent = ({fieldNameText, onTextInput}) => {
+const TextInputComponent = ({fieldNameText, onTextInput, onInputFocus}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.fieldNameText}>{fieldNameText}</Text>
@@ -13,6 +13,8 @@ const TextInputComponent = ({fieldNameText, onTextInput}) => {
           onChangeText={text => {
             onTextInput(text);
           }}
+          onFocus={onInputFocus}
+          autoFocus={false}
           // value={'cxzxczxncbzx'}
         />
       </View>
