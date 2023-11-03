@@ -30,5 +30,9 @@ export const link_ic = require('./../assets/icons/link_ic.svg');
 export const more_horizontal_ic = require('./../assets/icons/more_horizontal_ic.svg');
 export const right_arrow_ellipse_ic = require('./../assets/icons/right_arrow_ellipse_ic.svg');
 export const setting_ic = require('./../assets/icons/setting_ic.svg');
+export const back_arrow_ic = require('./../assets/icons/back_arrow_ic.svg');
+export const box_check_ic = require('./../assets/icons/box_check_ic.svg');
+export const box_unchecked_ic = require('./../assets/icons/box_unchecked_ic.svg');
+
 // export const share_ic = require('./../assets/icons/share_ic.svg');
 export const youtube_activity_ic = require('./../assets/icons/youtube_activity_ic.svg');
