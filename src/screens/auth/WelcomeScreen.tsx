@@ -25,6 +25,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Poppins_Regular} from '../../utils/fonts';
 import {scale, moderateVerticalScale} from 'react-native-size-matters';
 import VectorImage from 'react-native-vector-image';
+import RegistrationConfirm from '../../component/RegistrationConfirm';
 
 const WelcomeScreen = ({navigation}) => {
   const [isLoginSelected, setIsLoginSelected] = useState(true);
@@ -32,6 +33,7 @@ const WelcomeScreen = ({navigation}) => {
   const [isShowBtoomView, setIsShowBtoomView] = useState(true);
   const [isShowLoginInputs, setIsShowLoginInputs] = useState(false);
   const [isRememberMe, setIsRememberMe] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const switchToLogin = () => {
     setIsLoginSelected(true);
@@ -46,6 +48,14 @@ const WelcomeScreen = ({navigation}) => {
   const onInputFocus = () => {
     setIsShowBtoomView(false);
   };
+  const registerConfirm = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   const gradientColor = ['#00000000', '#000000'];
   return (
     <View style={styles.container}>
@@ -200,6 +210,8 @@ const WelcomeScreen = ({navigation}) => {
             onPress={() => {
               if (isShowLoginInputs) {
                 navigation.navigate('TabContainer');
+              } else {
+                registerConfirm();
               }
             }}>
             {isShowLoginInputs ? (
@@ -210,6 +222,15 @@ const WelcomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
       )}
+      {modalVisible && (
+        <RegistrationConfirm
+          isVisible={modalVisible}
+          username="John Doe"
+          loginId="Rohanpurohit267"
+          password="ABcdt@#$sk123"
+          onClose={closeModal}
+        />
+      )}
     </View>
   );
 };
@@ -218,7 +239,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BALCK_COLOR,
-    paddingTop: moderateVerticalScale(50),
   },
   logoView: {
     alignItems: 'center',

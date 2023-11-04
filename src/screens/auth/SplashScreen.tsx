@@ -1,10 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import {BALCK_COLOR, PD_THEME_COLOR} from '../../utils/colors';
 import FastImage from 'react-native-fast-image';
 import {powerdopLogo} from '../../utils/images';
@@ -26,7 +21,7 @@ const SplashScreen = ({navigation}) => {
     <View style={styles.container}>
       <FastImage source={powerdopLogo} style={styles.pdLogo} />
       <Text style={styles.splashText}>PowerDope</Text>
-      <ActivityIndicator color={PD_THEME_COLOR}/>
+      <ActivityIndicator color={PD_THEME_COLOR} />
     </View>
   );
 };
@@ -37,17 +32,17 @@ const styles = StyleSheet.create({
     backgroundColor: BALCK_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
-    gap:10
+    gap: 10,
   },
   pdLogo: {
     width: WINDOW_WIDTH * 0.2,
     height: WINDOW_HEIGHT * 0.1,
   },
-  splashText:{
-    fontSize:30,
-    fontWeight:'800',
-    color:PD_THEME_COLOR
-  }
+  splashText: {
+    fontSize: 30,
+    fontWeight: '800',
+    color: PD_THEME_COLOR,
+  },
 });
 
 export default SplashScreen;

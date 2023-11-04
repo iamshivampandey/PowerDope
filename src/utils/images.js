@@ -15,6 +15,7 @@ export const Ellipse_image = require('./../assets/images/Ellipse_image.png');
 export const google_image = require('./../assets/images/google_image.png');
 export const numberpad_image = require('./../assets/images/numberpad_image.png');
 export const outlook_image = require('./../assets/images/outlook_image.png');
+export const registerSuccessImage = require('./../assets/images/registerSuccessImage.png');
 
 // screen icons
 export const calendar_ic = require('./../assets/icons/calendar_ic.svg');
